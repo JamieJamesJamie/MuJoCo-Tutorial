@@ -1,0 +1,108 @@
+<mujoco model="SPIDER_4_LEGS">
+	<default>
+		<!--
+			Default values - e.g. Each geom defined in worldbody
+            will be a "capsule" shape unless specified differently
+            (like on line 30)
+		-->
+		<geom type="capsule" rgba="0.7 0.3 0.3 1" />
+		<joint damping="2" type="hinge" />
+	</default>
+
+	<asset>
+		<!-- Skybox texture -->
+		<texture name="skybox" type="skybox" builtin="gradient" rgb1=".4 .6 .8" rgb2="0 0 0" width="800" height="800" mark="random" markrgb="1 1 1" />
+
+		<!-- Floor texture / material -->
+		<texture name="checker_pattern" type="2d" builtin="checker" width=300 height=300 rgb1="0.2 0.3 0.4" rgb2="0.3 0.4 0.5" />
+		<material name="floor_material" texture="checker_pattern" texrepeat="5 5" />
+	</asset>
+
+	<visual>
+		<!-- Let there be light! -->
+		<headlight ambient="0.4 0.4 0.4" diffuse="0.8 0.8 0.8" specular="0.1 0.1 0.1" />
+		<quality shadowsize="2048" />
+	</visual>
+
+	<!-- Let's add some objects to our model! -->
+	<worldbody>
+		<!-- Add a floor -->
+		<geom name="floor" type="plane" size="2 2 0.1" material="floor_material" rgba="0.5 0.5 0.5 1" />
+
+		<!-- Add a spider -->
+		<body name="spider" pos="0 0 0.15">
+			<!-- The spider is free to move! -->
+			<freejoint />
+
+			<!-- Spider's body -->
+			<geom name="torso" type="ellipsoid" size="0.1 0.1 0.05" />
+
+			<!-- Spider's legs -->
+
+			<!-- Leg 1 -->
+			<body name="leg1_thigh" pos="0.1 0 0" euler="0 0 0">
+				<geom name="leg1_thigh" fromto="0 0 0 0.1 0 0" size="0.025" />
+				<joint name="leg1_thigh" axis="0 0 1" />
+
+				<body name="leg1_lower_leg" pos="0.1 0 0">
+					<geom name="leg1_lower_leg" fromto="0 0 0 0 0 -0.1" size="0.02" />
+					<joint name="leg1_lower_leg" axis="0 1 0" />
+				</body>
+			</body>
+
+			<!-- Leg 2 -->
+			<body name="leg2_thigh" pos="0 0.1 0" euler="0 0 90">
+				<geom name="leg2_thigh" fromto="0 0 0 0.1 0 0" size="0.025" />
+				<joint name="leg2_thigh" axis="0 0 1" />
+
+				<body name="leg2_lower_leg" pos="0.1 0 0">
+					<geom name="leg2_lower_leg" fromto="0 0 0 0 0 -0.1" size="0.02" />
+					<joint name="leg2_lower_leg" axis="0 1 0" />
+				</body>
+			</body>
+
+			<!-- Leg 3 -->
+			<body name="leg3_thigh" pos="-0.1 0 0" euler="0 0 180">
+				<geom name="leg3_thigh" fromto="0 0 0 0.1 0 0" size="0.025" />
+				<joint name="leg3_thigh" axis="0 0 1" />
+
+				<body name="leg3_lower_leg" pos="0.1 0 0">
+					<geom name="leg3_lower_leg" fromto="0 0 0 0 0 -0.1" size="0.02" />
+					<joint name="leg3_lower_leg" axis="0 1 0" />
+				</body>
+			</body>
+
+			<!-- Leg 4 -->
+			<body name="leg4_thigh" pos="0 -0.1 0" euler="0 0 270">
+				<geom name="leg4_thigh" fromto="0 0 0 0.1 0 0" size="0.025" />
+				<joint name="leg4_thigh" axis="0 0 1" />
+
+				<body name="leg4_lower_leg" pos="0.1 0 0">
+					<geom name="leg4_lower_leg" fromto="0 0 0 0 0 -0.1" size="0.02" />
+					<joint name="leg4_lower_leg" axis="0 1 0" />
+				</body>
+			</body>
+		</body>
+
+		<body name="target" pos="1 -1 .032">
+			<site name="target" type="sphere" size=".03 .03 .03" rgba=".3 .7 .3 1" />
+		</body>
+	</worldbody>
+
+	<actuator>
+		<!--
+			Actuators correspond to continuous actions for RL.
+			Currently their ranges are between -1 and 1
+			i.e. $a \in \mathcal{A} \equiv \left[ -1, 1 \right]^8$,
+			but this can be changed.
+		-->
+		<position joint="leg1_thigh" 	 kp=10 />
+		<position joint="leg1_lower_leg" kp=10 />
+		<position joint="leg2_thigh" 	 kp=10 />
+		<position joint="leg2_lower_leg" kp=10 />
+		<position joint="leg3_thigh" 	 kp=10 />
+		<position joint="leg3_lower_leg" kp=10 />
+		<position joint="leg4_thigh" 	 kp=10 />
+		<position joint="leg4_lower_leg" kp=10 />
+	</actuator>
+</mujoco>
