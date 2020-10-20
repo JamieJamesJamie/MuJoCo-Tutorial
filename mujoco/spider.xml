@@ -14,7 +14,7 @@
 		<texture name="skybox" type="skybox" builtin="gradient" rgb1=".4 .6 .8" rgb2="0 0 0" width="800" height="800" mark="random" markrgb="1 1 1" />
 
 		<!-- Floor texture / material -->
-		<texture name="checker_pattern" type="2d" builtin="checker" width=300 height=300 rgb1="0.2 0.3 0.4" rgb2="0.3 0.4 0.5" />
+		<texture name="checker_pattern" type="2d" builtin="checker" width="300" height="300" rgb1="0.2 0.3 0.4" rgb2="0.3 0.4 0.5" />
 		<material name="floor_material" texture="checker_pattern" texrepeat="5 5" />
 	</asset>
 
@@ -96,13 +96,13 @@
 			i.e. $a \in \mathcal{A} \equiv \left[ -1, 1 \right]^8$,
 			but this can be changed.
 		-->
-		<position joint="leg1_thigh" 	 kp=10 />
-		<position joint="leg1_lower_leg" kp=10 />
-		<position joint="leg2_thigh" 	 kp=10 />
-		<position joint="leg2_lower_leg" kp=10 />
-		<position joint="leg3_thigh" 	 kp=10 />
-		<position joint="leg3_lower_leg" kp=10 />
-		<position joint="leg4_thigh" 	 kp=10 />
-		<position joint="leg4_lower_leg" kp=10 />
+		<position joint="leg1_thigh" 	 kp="10" />
+		<position joint="leg1_lower_leg" kp="10" />
+		<position joint="leg2_thigh" 	 kp="10" />
+		<position joint="leg2_lower_leg" kp="10" />
+		<position joint="leg3_thigh" 	 kp="10" />
+		<position joint="leg3_lower_leg" kp="10" />
+		<position joint="leg4_thigh" 	 kp="10" />
+		<position joint="leg4_lower_leg" kp="10" />
 	</actuator>
 </mujoco>
