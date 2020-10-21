@@ -72,7 +72,7 @@ class Physics(mujoco.Physics):
 
 class SpiderEnv(Task):
     """
-    Spider environment for RL. The task is for the spider to move to the sphere target.
+    Spider environment for RL. The task is for the spider to move to the target button.
 
     The agent will get a sparse reward of 1.0 for stepping on the button.
     """
@@ -127,12 +127,12 @@ class SpiderEnv(Task):
     def get_reward(self, physics: Physics):
         """
         Returns a sparse reward from the environment.
-        i.e. if the button is being pressed, return 1.0, otherwise return 0.0
+        i.e. if the button is being pressed, return 1.0, otherwise return 0.0.
 
         :param physics: Instance of `Physics`
         :return: A reward from the environment.
         """
-        return float(physics.current_button_force() >= 0)
+        return float(physics.current_button_force() > 0)
 
 
 # Example of how the environment could be used
