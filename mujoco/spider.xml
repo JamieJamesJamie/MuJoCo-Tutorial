@@ -84,9 +84,12 @@
 			</body>
 		</body>
 
-		<body name="target" pos="1 -1 .032">
-			<site name="target" type="sphere" size=".03 .03 .03" rgba=".3 .7 .3 1" />
+		<!-- Add a button -->
+		<body name="target_button" pos="1 -1 .032">
+			<geom name="target_button" type="cylinder" size="0.25 0.0202" rgba="0 0.7 0 1" />
+			<site name="target_button" type="cylinder" size="0.2525 0.0202" rgba="0 0.7 0 0" />
 		</body>
+
 	</worldbody>
 
 	<actuator>
@@ -96,13 +99,21 @@
 			i.e. $a \in \mathcal{A} \equiv \left[ -1, 1 \right]^8$,
 			but this can be changed.
 		-->
-		<position joint="leg1_thigh" 	 kp="10" />
-		<position joint="leg1_lower_leg" kp="10" />
-		<position joint="leg2_thigh" 	 kp="10" />
-		<position joint="leg2_lower_leg" kp="10" />
-		<position joint="leg3_thigh" 	 kp="10" />
-		<position joint="leg3_lower_leg" kp="10" />
-		<position joint="leg4_thigh" 	 kp="10" />
-		<position joint="leg4_lower_leg" kp="10" />
+		<position name="leg1_thigh" joint="leg1_thigh" kp="10" ctrllimited="true" ctrlrange="-1.0 1.0" />
+		<position name="leg1_lower_leg" joint="leg1_lower_leg" kp="10" ctrllimited="true" ctrlrange="-1.0 1.0" />
+		<position name="leg2_thigh" joint="leg2_thigh" kp="10" ctrllimited="true" ctrlrange="-1.0 1.0" />
+		<position name="leg2_lower_leg" joint="leg2_lower_leg" kp="10" ctrllimited="true" ctrlrange="-1.0 1.0" />
+		<position name="leg3_thigh" joint="leg3_thigh" kp="10" ctrllimited="true" ctrlrange="-1.0 1.0" />
+		<position name="leg3_lower_leg" joint="leg3_lower_leg" kp="10" ctrllimited="true" ctrlrange="-1.0 1.0" />
+		<position name="leg4_thigh" joint="leg4_thigh" kp="10" ctrllimited="true" ctrlrange="-1.0 1.0" />
+		<position name="leg4_lower_leg" joint="leg4_lower_leg" kp="10" ctrllimited="true" ctrlrange="-1.0 1.0" />
 	</actuator>
+
+	<sensor>
+		<!--
+			Sense when the target button has been touched.
+			More being touched = more reward!
+		-->
+		<touch name="button_touch_sensor" site="target_button" />
+	</sensor>
 </mujoco>
